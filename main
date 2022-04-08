@@ -1,0 +1,46 @@
+import json
+
+
+
+
+############################################################
+###move a dictionary into json and then back out of json ###
+#############################################################
+
+# declare a normal dictionary
+thisdict = {
+  "brand": "Ford",
+  "model": "Mustang",
+  "year": 1964
+}
+
+#print attributes of normal dictionary
+print()
+print("Key access from the original dictionary:",thisdict["brand"])
+
+# convert to json style string
+dict_1 = json.dumps(thisdict)
+# print the converted string that we will send to a file
+print(dict_1)
+
+# open or make a new file called dictionary_save.json
+# that we will refer to as thisdict_file in the code
+with open("dictionary_save.json", "w") as thisdict_file:
+    # put the json string in dict_1 in the file we just opened
+    json.dump(dict_1, thisdict_file)
+
+# open the file again, this time as read only with code alias file_save
+with open('dictionary_save.json', 'r') as thisdict_save:
+  # use json.load to get the json string from
+  data = json.load(thisdict_save)
+  # we have now retrieved the string that we sent
+  print(data)
+
+  # the string is useless until we tranlate it back to a dictionary with json.loads
+  data = json.loads(data)
+  # notice the printed data is now in single quotes it has ben translated back to
+  # a dictionary object and can be manipulated again
+  print(data)
+
+
+  print("Key access from the returned dictionary:", data["brand"])
